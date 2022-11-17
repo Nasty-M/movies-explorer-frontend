@@ -1,0 +1,6 @@
+.promo__nav {
+  display: flex;
+  position: absolute;
+  bottom: 30px;
+  padding: 0;
+}

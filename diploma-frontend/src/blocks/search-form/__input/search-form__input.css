@@ -1,0 +1,20 @@
+.search-form__input {
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid #E8E8E8;
+  padding: 15px 0;
+  color: #A0A0A0;
+  font-size: 28px;
+}
+
+.search-form__input:focus {
+  outline: none;
+  border-bottom: 1px solid #FF6838;
+}
+
+@media screen and (max-width: 320px) {
+  .search-form__input {
+    text-align: left;
+    font-size: 18px;
+  }
+}

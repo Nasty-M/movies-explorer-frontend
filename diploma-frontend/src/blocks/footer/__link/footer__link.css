@@ -1,0 +1,16 @@
+.footer__link {
+  text-decoration: none;
+  color: black;
+  font-size: 13px;
+}
+
+@media screen and (max-width: 576px) {
+  .footer__link {
+    margin: 0;
+    font-size: 12px;
+  }
+
+  .footer__link:last-of-type {
+    margin-bottom: 0;
+  }
+}

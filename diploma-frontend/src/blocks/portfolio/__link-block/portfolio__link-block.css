@@ -1,0 +1,6 @@
+.portfolio__link-block {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 0 19px;
+}

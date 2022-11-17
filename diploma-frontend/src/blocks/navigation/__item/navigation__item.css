@@ -1,0 +1,23 @@
+.navigation__item {
+  list-style: none;
+  margin-right: 20px;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.navigation__item:last-of-type {
+  margin-right: 0;
+}
+
+@media screen and (max-width: 768px) {
+  .navigation__item {
+    font-size: 18px;
+    margin: 0;
+    margin-bottom: 28px;
+    font-weight: 500;
+  }
+
+  .navigation__item:last-of-type {
+    margin-bottom: 0;
+  }
+}

@@ -1,0 +1,11 @@
+.profile__button {
+  border: 0;
+  font-size: 13px;
+  cursor: pointer;
+  background-color: white;
+  margin-bottom: 16px;
+}
+
+.profile__button:last-of-type {
+  margin-bottom: 0;
+}

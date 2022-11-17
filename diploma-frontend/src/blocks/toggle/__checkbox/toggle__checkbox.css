@@ -1,0 +1,12 @@
+.toggle__checkbox {
+  position: absolute;
+  margin-left: -9999px;
+  visibility: hidden;
+}
+.toggle__checkbox + label {
+  display: block;
+  position: relative;
+  cursor: pointer;
+  outline: none;
+  user-select: none;
+}

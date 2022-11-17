@@ -1,0 +1,12 @@
+.header__auth-nav {
+  display: flex;
+  justify-content: space-between;
+  width: 190px;
+  align-items: baseline;
+}
+
+@media screen and (max-width: 320px) {
+  .header__auth-nav {
+    width: 135px;
+  }
+}

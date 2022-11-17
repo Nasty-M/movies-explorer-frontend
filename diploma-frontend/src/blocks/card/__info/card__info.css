@@ -1,0 +1,9 @@
+.card__info {
+  background-color: #FFF;
+  padding-top: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: start;
+  margin-top: -5px;
+}

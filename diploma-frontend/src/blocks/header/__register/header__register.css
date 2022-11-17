@@ -1,0 +1,13 @@
+.header__register {
+  font-size: 12px;
+  line-height: 1.33;
+  font-weight: 500;
+  color: black;
+  text-decoration: none;
+}
+
+@media screen and (max-width: 320px) {
+  .header__register {
+    font-size: 10px;
+  }
+}

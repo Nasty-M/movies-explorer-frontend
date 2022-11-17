@@ -1,0 +1,30 @@
+.header__nav-container {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+@media screen and (max-width: 768px) {
+  .header__nav-container {
+    width: 70%;
+    height: 100vh;
+    position: fixed;
+    z-index: 30;
+    background-color: #ffffff;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    opacity: 1;
+    transition: 0.5s;
+    padding: 160px 0 80px;
+    box-sizing: border-box;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .header__nav-container {
+    width: 100%;
+  }
+}

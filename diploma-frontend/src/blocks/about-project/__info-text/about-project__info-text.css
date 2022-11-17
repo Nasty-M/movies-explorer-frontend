@@ -1,0 +1,11 @@
+.about-project__info-text {
+  font-size: 14px;
+  line-height: 1.25;
+  margin: 0;
+}
+
+@media screen and (max-width: 320px) {
+  .about-project__info-text {
+    font-size: 11px;
+  }
+}
