@@ -1,0 +1,9 @@
+.account {
+  display: flex;
+  align-items: center;
+  width: 100px;
+  height: 32px;
+  border: 1px solid #AAA;
+  border-radius: 20px;
+  justify-content: center;
+}

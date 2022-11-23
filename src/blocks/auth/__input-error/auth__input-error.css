@@ -1,0 +1,12 @@
+.auth__input-error {
+  display: inline-block;
+  position: absolute;
+  width: 358px;
+  color: red;
+  font-size: 10px;
+  line-height: 1.21;
+  /*visibility: hidden;*/
+  top: 43px;
+  left: 0;
+  z-index: 1;
+}

@@ -1,0 +1,12 @@
+.about-me__card-subtitle {
+  font-size: 18px;
+  line-height: 1.11;
+  font-weight: 500;
+  margin: 0 0 26px;
+}
+
+@media screen and (max-width: 768px) {
+  .about-me__card-subtitle {
+    font-size: 11px;
+  }
+}

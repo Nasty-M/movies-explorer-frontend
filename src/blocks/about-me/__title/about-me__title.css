@@ -1,0 +1,10 @@
+.about-me__title {
+  width: 100%;
+  text-align: left;
+  font-size: 22px;
+  font-weight: 400;
+  padding-bottom: 23px;
+  border-bottom: 1px solid black;
+  margin-bottom: 70px;
+  letter-spacing: -1px;
+}

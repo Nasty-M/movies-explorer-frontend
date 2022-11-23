@@ -1,0 +1,12 @@
+.techs {
+  width: 100%;
+  background-color: #F5F5F5;
+  padding: 100px 0;
+}
+
+@media screen and (max-width: 320px) {
+  .techs {
+    background-color: #fff;
+  }
+}
+

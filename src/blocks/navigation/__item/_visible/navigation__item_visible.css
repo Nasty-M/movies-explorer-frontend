@@ -1,0 +1,9 @@
+.navigation__item_visible {
+  display: none;
+}
+
+@media screen and (max-width: 768px) {
+  .navigation__item_visible {
+    display: inline-block;
+  }
+}

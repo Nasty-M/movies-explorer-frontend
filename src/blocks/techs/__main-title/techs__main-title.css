@@ -1,0 +1,19 @@
+.techs__main-title {
+  font-size: 50px;
+  line-height: 1.16;
+  letter-spacing: -4px;
+  font-weight: 400;
+  margin: 0 0 26px;
+}
+
+@media screen and (max-width: 768px) {
+  .techs__main-title {
+    font-size: 48px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .techs__main-title {
+    font-size: 30px;
+  }
+}

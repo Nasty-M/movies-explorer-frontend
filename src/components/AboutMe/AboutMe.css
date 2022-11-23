@@ -1,0 +1,9 @@
+@import url(../../blocks/about-me/about-me.css);
+@import url(../../blocks/about-me/__content/about-me__content.css);
+@import url(../../blocks/about-me/__title/about-me__title.css);
+@import url(../../blocks/about-me/__card/about-me__card.css);
+@import url(../../blocks/about-me/__card-title/about-me__card-title.css);
+@import url(../../blocks/about-me/__card-subtitle/about-me__card-subtitle.css);
+@import url(../../blocks/about-me/__card-text/about-me__card-text.css);
+@import url(../../blocks/about-me/__photo/about-me__photo.css);
+@import url(../../blocks/about-me/__link/about-me__link.css);

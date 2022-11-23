@@ -1,0 +1,26 @@
+.about-project__info-card {
+  margin-right: 40px;
+}
+.about-project__info-card:last-of-type {
+  margin-right: 0px;
+}
+
+@media screen and (max-width: 768px) {
+  .about-project__info-card {
+    margin-right: 30px;
+  }
+  .about-project__info-card:last-of-type {
+    margin-right: 0px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .about-project__info-card {
+    margin: 0;
+    margin-bottom: 56px;
+  }
+
+  .about-project__info-card:last-of-type {
+    margin-bottom: 0px;
+  }
+}
