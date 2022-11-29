@@ -1,13 +1,26 @@
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import logo from '../../images/logo.png'
+import { useForm } from "react-hook-form";
+import isEmail from "validator/lib/isEmail";
 
-function Login() {
+function Login(props) {
+
+  const { register, handleSubmit, formState: { errors } } = useForm();
+  
+  function onSubmit(data) {
+    props.onLoginUser({
+      email: data.email,
+      password: data.password,
+    })
+  }
+
   return (
     <main className='main'>
+      <p className={`profile__message ${props.message && 'profile__message_active'}`}>{props.textMessage}</p>
       <section className="auth">
         <Link to="/"><img className="auth__logo" src={logo} alt="Лого"/></Link>
         <h2 className="auth__title">Рады видеть!</h2>
-        <form className="auth__form" name="register">
+        <form className="auth__form" name="register" onSubmit={handleSubmit(onSubmit)}>
           <label className='auth__label'>E-mail</label>
           <label className='auth__input-block'>
             <input 
@@ -16,19 +29,36 @@ function Login() {
               className="auth__input"
               required
               name="email"
+              {...register('email', {
+                required: true,
+                validate: (input) => isEmail(input),
+              })}  
+              aria-invalid={errors.email ? "true" : "false"}
             />
-            <span className="input-email-error auth__input-error"></span>
+            <span className={`auth__input-error auth__input-error_visible_auth`}>
+              {errors.email?.type === 'required' && 'Пожалуйста, заполните поле'}
+              {errors.email?.type === 'validate' && 'Введите Email'}
+            </span>
           </label>
           <label className='auth__label'>Пароль</label>
           <label className='auth__input-block'>
             <input 
-              type="text" 
+              type="password" 
               id="input-pass" 
               className="auth__input" 
               required
-              name="pass"
+              name="password"
+              {...register('password', {
+                required: true,
+                minLength: 6,
+                pattern: /(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{6,}/g,
+              })} 
             />
-            <span className="input-pass-error auth__input-error"></span>
+            <span className={`auth__input-error auth__input-error_visible_auth`}>
+              {errors.password?.type === 'required' && 'Пожалуйста, заполните поле'}
+              {errors.password?.type === 'minLength' && 'Пароль должен быть не менее 6 символов'}
+              {errors.password?.type === 'pattern' && 'Пароль должен содержать строчные, заглавные латинские буквы и цифры'}
+            </span>
           </label>
           <button type="submit" className="auth__button">Войти</button>
         </form>
@@ -38,4 +68,4 @@ function Login() {
   )
 }
 
-export default Login;
+export default withRouter(Login);

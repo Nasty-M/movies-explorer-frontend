@@ -3,4 +3,17 @@
   padding: 0;
   width: 100%;
   object-fit: cover;
+  height: 201px;
+}
+
+@media screen and (max-width: 768px) {
+  .card__image {
+    font-size: 190px;
+  }
+}
+
+@media screen and (max-width: 230px) {
+  .card__image {
+    font-size: 168px;
+  }
 }

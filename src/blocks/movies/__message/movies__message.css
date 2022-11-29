@@ -1,0 +1,10 @@
+.movies__message {
+  position: absolute;
+  top: 30px;
+  left: 0px;
+  width: 100%;
+  text-align: left;
+  font-size: 16px;
+  font-weight: 500;
+  visibility: hidden;
+}

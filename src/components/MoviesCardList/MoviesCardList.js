@@ -1,23 +1,23 @@
-import movies from "../../utils/constants";
 import MoviesCard from "../MoviesCard/MoviesCard";
 
 function MoviesCardList(props) {
 
-  const moviesArray = props.saved ? movies.filter(movie => movie.active === true) : movies; 
-
   return (
     <section className="movies" aria-label="Галерея">
       <div className="movies__content">
+        <p className={`movies__message ${props.emptySearch && 'movies__message_active'}`}>Ничего не найдено</p>
         <ul className="movies__list">
-          {moviesArray.map((movie) => (
+          {props.moviesList.map((movie) => (
             <MoviesCard 
-              key={movie._id} 
+              key={movie.id} 
               elem={movie}
-              saved={props.saved}
+              onSave={props.onSave}
+              savedMovie={props.savedMovie}
+              path={props.path}
             />
           ))}
         </ul>
-        <button className="movies__button" type="button">Ещё</button>
+        <button className={`movies__button ${props.buttonElse && (props.path === '/movies') && 'movies__button_active'}`} onClick={props.addCard} type="button">Ещё</button>
       </div>
     </section>
   );
