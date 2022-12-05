@@ -38,7 +38,7 @@ function SavedMovies(props) {
         </a>
       </Header>
       <main className="main">
-        <SearchForm onSearchMovies={props.searchMovies} toggleShortMovie={props.toggleShortMovie} shortMovie={props.shortMovie} />
+        <SearchForm onSearchMovies={props.searchMovies} toggleShortMovie={props.toggleShortMovie} shortSaveMovie={props.shortSaveMovie} />
         <Preloader preloader={props.preloader}/>
         <MoviesCardList emptySearch={props.emptySearch} activatePreloader={props.activatePreloader} savedMovie={props.savedMovie} onSave={props.onSaveMovie} moviesList={props.isSearched ? props.cards : props.allSaveMovie} buttonElse={props.buttonElse} addCard={props.addCard} />
       </main>

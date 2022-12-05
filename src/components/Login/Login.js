@@ -1,17 +1,22 @@
 import { Link, withRouter } from 'react-router-dom';
-import logo from '../../images/logo.png'
+import logo from '../../images/logo.png';
 import { useForm } from "react-hook-form";
 import isEmail from "validator/lib/isEmail";
 
 function Login(props) {
 
-  const { register, handleSubmit, formState: { errors } } = useForm();
+  const { register, handleSubmit, formState: { errors, isValid } } = useForm({mode: "onChange"});
   
   function onSubmit(data) {
-    props.onLoginUser({
-      email: data.email,
-      password: data.password,
-    })
+    if (data.email && data.password) {
+      props.onLoginUser({
+        email: data.email,
+        password: data.password,
+      })
+    } else {
+      return !isValid;
+    }
+    
   }
 
   return (
@@ -27,7 +32,6 @@ function Login(props) {
               type="text" 
               id="input-email" 
               className="auth__input"
-              required
               name="email"
               {...register('email', {
                 required: true,
@@ -45,8 +49,7 @@ function Login(props) {
             <input 
               type="password" 
               id="input-pass" 
-              className="auth__input" 
-              required
+              className="auth__input"
               name="password"
               {...register('password', {
                 required: true,
@@ -60,7 +63,7 @@ function Login(props) {
               {errors.password?.type === 'pattern' && 'Пароль должен содержать строчные, заглавные латинские буквы и цифры'}
             </span>
           </label>
-          <button type="submit" className="auth__button">Войти</button>
+          <button type="submit" className={`auth__button ${!isValid ? 'auth__button_disabled' : ''}`} disabled={!isValid}>Войти</button>
         </form>
         <p className='auth__note'>Ещё не зарегистрированы? <Link to='/signup' className='auth__link'>Регистрация</Link></p>
       </section>

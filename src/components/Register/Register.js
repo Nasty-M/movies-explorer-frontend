@@ -5,14 +5,19 @@ import isEmail from "validator/lib/isEmail";
 
 function Register(props) {
 
-  const { register, handleSubmit, formState: { errors } } = useForm();
+  const { register, handleSubmit, formState: { errors, isValid } } = useForm({mode: "onChange"});
 
   function onSubmit(data) {
-    props.onRegisterUser({
-      name: data.name,
-      email: data.email,
-      password: data.password,
-    });
+    if (data.name && data.email && data.password) {
+      props.onRegisterUser({
+        name: data.name,
+        email: data.email,
+        password: data.password,
+      });
+    } else {
+      return !isValid;
+    }
+    
   }
 
   return (
@@ -48,7 +53,6 @@ function Register(props) {
               type="text" 
               id="input-email" 
               className="auth__input"
-              required
               name="email"
               {...register('email', {
                 required: true,
@@ -67,7 +71,6 @@ function Register(props) {
               type="password" 
               id="input-pass" 
               className="auth__input" 
-              required
               name="password"
               {...register('password', {
                 required: true,
@@ -81,7 +84,7 @@ function Register(props) {
               {errors.password?.type === 'pattern' && 'Пароль должен содержать строчные, заглавные латинские буквы и цифры'}
             </span>
           </label>
-          <button type="submit" className="auth__button">Зарегистрироваться</button>
+          <button type="submit" className={`auth__button ${!isValid ? 'auth__button_disabled' : ''}`} disabled={!isValid} >Зарегистрироваться</button>
         </form>
         <p className='auth__note'>Уже зарегистрированы? <Link to='/signin' className='auth__link'>Войти</Link></p>
       </section>
