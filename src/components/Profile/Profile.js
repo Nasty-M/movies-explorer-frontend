@@ -2,15 +2,27 @@ import Header from "../Header/Header";
 import Navigation from "../Navigation/Navigation";
 import avatar from "../../images/avatar.png"
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
-import { useContext, useEffect } from "react";
+import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import isEmail from "validator/lib/isEmail";
 
 function Profile(props) {
 
-  const { register, formState: { errors, isValid }, handleSubmit } = useForm({mode: 'onChange'});
+  const { register, formState: { errors, isValid }, handleSubmit, watch } = useForm({mode: 'onChange'});
+  
+  const [activeButton, setActiveButton] = useState(false);
+    
   const currentUser = useContext(CurrentUserContext);
+
+  watch((data, {name, email}) => {
+    if (data.name !== currentUser.name || data.email !== currentUser.email) {
+      setActiveButton(true);
+    } else {
+      setActiveButton(false);
+      return !isValid;
+    }
+  })
 
   function onSubmit(data) {
     if (data.name !== currentUser.name || data.email !== currentUser.email) {
@@ -18,6 +30,7 @@ function Profile(props) {
         name: data.name,
         email: data.email,
       })
+      setActiveButton(false);
     } else {
       return !isValid
     }
@@ -94,7 +107,7 @@ function Profile(props) {
             </div>
           </div>
           <div className="profile__buttons">
-            <button className={`profile__button ${isValid ? 'profile__button_disabled' : ''}`} type="submit" disabled={!isValid}>Редактировать</button>
+            <button disabled={!isValid} className={`profile__button ${!activeButton ? 'profile__button_disabled' : ''}`} type="submit">Редактировать</button>
             <button className="profile__button profile__button_type_red" type="button" onClick={props.logout}>Выйти из аккаунта</button>
           </div>
         </form>

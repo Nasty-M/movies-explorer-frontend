@@ -1,5 +1,5 @@
 import './App.css';
-import { Route, Switch, withRouter } from 'react-router-dom';
+import { Route, Switch, withRouter, Redirect, useLocation } from 'react-router-dom';
 import Main from '../Main/Main';
 import Movies from '../Movies/Movies';
 import SavedMovies from '../SavedMovies/SavedMovies';
@@ -41,15 +41,16 @@ function App(props) {
   const [isSearched, setIsSearched] = useState(false);
   const [allMovies, setAllMovies] = useState([]);
 
-  
+  const location = useLocation();
+
   function loadMovieCards() {
-    if (width > 1280) {
+    if (width > 1279) {
       setCountOnPage(12);
       setCountAdd(4);
-    } else if (width > 1024) {
+    } else if (width > 1023 && width < 1280) {
       setCountOnPage(9);
       setCountAdd(3);
-    } else if (width > 767) {
+    } else if (width > 767 && width < 1024) {
       setCountOnPage(8);
       setCountAdd(2);
     } else if (width < 768) {
@@ -58,16 +59,15 @@ function App(props) {
     }
   }
 
-  useEffect(() => {
-    loadMovieCards();
-  }, [width])
-
   window.onresize = (() => {
     setTimeout(() => {
       setWidth(window.innerWidth);
-      loadMovieCards();
     }, 500)
   })
+
+  useEffect(() => {
+    loadMovieCards();
+  }, [width])
 
   function checkedButtonElse() {
     if (countCards > 3 && countOnPage < countCards) {
@@ -108,6 +108,7 @@ function App(props) {
       if (data) {
         setLoggedIn(true);
         setCurrentUser(data);
+        props.history.push(location.pathname);
       }
     })
     .catch((err) => {
@@ -370,6 +371,12 @@ function App(props) {
     handleSearchSavedMovies(searchedSaveWord);
   }, [shortSaveMovie])
 
+  useEffect(() => {
+    if (location.pathname !== '/saved-movie') {
+      setSearchedSaveWord('');
+    }
+  }, [location]);
+
   function logout() {
     api.logout()
     .then(() => {
@@ -427,7 +434,7 @@ function App(props) {
             loggedIn={loggedIn}
             component={SavedMovies}
             path="/saved-movies"
-            toggleShortMovie={toggleSaveShortMovie}
+            toggleSaveShortMovie={toggleSaveShortMovie}
             savedMovie={savedMovie}
             cards={ savedMovie || [] }
             navVisible={navVisible}
@@ -456,18 +463,27 @@ function App(props) {
             message={message}
           />
           <Route path="/signin">
-            <Login 
-              onLoginUser={handleLoginUser} 
-              textMessage={textMessage}
-              message={message}
-            />
+            {!loggedIn ? (
+              <Login 
+                onLoginUser={handleLoginUser} 
+                textMessage={textMessage}
+                message={message}
+              />
+            ) : (
+              <Redirect to="/" />
+            )}
           </Route>
           <Route path="/signup">
-            <Register 
-              onRegisterUser={handleRegisterUser}
-              textMessage={textMessage}
-              message={message}
-            />
+            {!loggedIn ? (
+              <Register 
+                onRegisterUser={handleRegisterUser}
+                textMessage={textMessage}
+                message={message}
+              />
+            ) : (
+              <Redirect to="/" />
+            )}
+            
           </Route>
           <Route path="*">
             <NotFound />

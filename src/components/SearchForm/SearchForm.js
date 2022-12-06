@@ -6,7 +6,7 @@ function SearchForm(props) {
 
   const [searchWords, setSearchWords] = useState(props.searchWord || '');
   
-  const { register, handleSubmit, formState: { errors } } = useForm({mode: 'onChange'});
+  const { register, handleSubmit, formState: { errors } } = useForm({mode: 'onSubmit', reValidateMode: 'onSubmit'});
 
   function onSubmit(data) {
     props.onSearchMovies(data.search);
@@ -32,7 +32,7 @@ function SearchForm(props) {
           <button className="search-form__button" type="submit" onClick={props.activatePreloader}></button>
         </div>
         <div className="search-form__toggle">
-          <Toggle toggleShortMovie={props.toggleShortMovie} shortMovie={props.shortMovie} shortSaveMovie={props.shortSaveMovie} />
+          <Toggle toggleShortMovie={props.toggleShortMovie} toggleSaveShortMovie={props.toggleSaveShortMovie} shortMovie={props.shortMovie} shortSaveMovie={props.shortSaveMovie} />
         </div>
       </form>
     </section>

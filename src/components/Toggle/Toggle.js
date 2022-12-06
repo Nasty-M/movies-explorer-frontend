@@ -16,8 +16,13 @@ function Toggle(props) {
 
   function toggleChange() {
     setToggleSave(!toggleSave);
-    props.toggleShortMovie(!toggleSave);
   }
+
+  useEffect(() => {
+    if (location.pathname === '/saved-movies' && props.shortSaveMovie !== toggleSave) {
+      props.toggleSaveShortMovie();
+    }
+  }, [toggleSave])
 
   return (
     <>
