@@ -10,3 +10,4 @@
 @import url(../../blocks/header/__span/header__span.css);
 @import url(../../blocks/header/__burger/header__burger.css);
 @import url(../../blocks/header/__burger-link/header__burger-link.css);
+@import url(../../blocks/header/__nav/_visible/header__nav_visible.css);

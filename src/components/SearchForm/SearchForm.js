@@ -1,10 +1,13 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { useLocation } from "react-router-dom";
 import Toggle from "../Toggle/Toggle";
 
 function SearchForm(props) {
 
-  const [searchWords, setSearchWords] = useState(props.searchWord || '');
+  const location = useLocation();
+
+  const [searchWords, setSearchWords] = useState(location.pathname === '/movies' ? localStorage.getItem('searchWord') : props.searchWord);
   
   const { register, handleSubmit, formState: { errors } } = useForm({mode: 'onSubmit', reValidateMode: 'onSubmit'});
 

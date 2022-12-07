@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
-import baseLink from "../../utils/constants"
+import {baseLink} from "../../utils/constants"
 
 function MoviesCard(props) {
   const currentUser = useContext(CurrentUserContext);

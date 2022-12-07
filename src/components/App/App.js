@@ -12,6 +12,7 @@ import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import moviesApi from '../../utils/MoviesApi';
 import api from '../../utils/Api';
+import { COUNT_CARDS_ADD, COUNT_CARDS_ON_PAGE } from '../../utils/constants';
 
 function App(props) {
 
@@ -45,17 +46,17 @@ function App(props) {
 
   function loadMovieCards() {
     if (width > 1279) {
-      setCountOnPage(12);
-      setCountAdd(4);
+      setCountOnPage(COUNT_CARDS_ON_PAGE.XL);
+      setCountAdd(COUNT_CARDS_ADD.L);
     } else if (width > 1023 && width < 1280) {
-      setCountOnPage(9);
-      setCountAdd(3);
+      setCountOnPage(COUNT_CARDS_ON_PAGE.L);
+      setCountAdd(COUNT_CARDS_ADD.M);
     } else if (width > 767 && width < 1024) {
-      setCountOnPage(8);
-      setCountAdd(2);
+      setCountOnPage(COUNT_CARDS_ON_PAGE.M);
+      setCountAdd(COUNT_CARDS_ADD.S);
     } else if (width < 768) {
-      setCountOnPage(5);
-      setCountAdd(5);
+      setCountOnPage(COUNT_CARDS_ON_PAGE.S);
+      setCountAdd(COUNT_CARDS_ADD.S);
     }
   }
 
@@ -76,6 +77,24 @@ function App(props) {
       setButtonElse(false);
     }
   }
+
+  function loadMovies() {
+    const searched = JSON.parse(localStorage.getItem('searchedMoviesList'));
+    const searchedWord = localStorage.getItem('searchWord');
+    if (searchedWord) {
+      setSearchWord(searchedWord);
+    }
+    
+    if (searched && searched !== []) {
+      setSearchMovies(searched);
+    }
+  }
+
+  useEffect(() => {
+    if (loggedIn) {
+      loadMovies();
+    }
+  }, [loggedIn, searchedMoviesList, searchedShortMoviesList])
   
   useEffect(() => {
     if (loggedIn) {
@@ -131,19 +150,24 @@ function App(props) {
   
   
 
-  useEffect(() => {
-    if (localStorage.getItem('searchWord')) {
-      handleSearchMovies(localStorage.getItem('searchWord'));
-    }
-  }, [shortMovie])
+  // useEffect(() => {
+  //   if (localStorage.getItem('searchWord')) {
+  //     handleSearchMovies(localStorage.getItem('searchWord'));
+  //   }
+  // }, [shortMovie])
 
-  function toggleShortMovie() {
+  function changeToggle() {
     setShortMovie(!shortMovie);
   }
 
-  function search(movieName) {
+  function toggleShortMovie() {
+    changeToggle();
+    handleSearchMovies(localStorage.getItem('searchWord'), !shortMovie);
+  }
+
+  function search(movieName, toggle) {
     if (allMovies) {
-      if (shortMovie === true) {
+      if (toggle === true) {
         const res = allMovies.filter((movie) => {
           return movie.nameRU.toLowerCase().indexOf(movieName.toLowerCase()) !== -1 && movie.duration < 40;
         });
@@ -153,7 +177,7 @@ function App(props) {
         setSearchedShortMoviesList(res);
         localStorage.setItem('searchedMoviesList', JSON.stringify(res));
         localStorage.setItem('searchWord', movieName);
-        localStorage.setItem('shortMovies', shortMovie)
+        localStorage.setItem('shortMovies', toggle)
       } else {
         const res = allMovies.filter((movie) => {
           return movie.nameRU.toLowerCase().indexOf(movieName.toLowerCase()) !== -1;
@@ -164,24 +188,24 @@ function App(props) {
         setSearchedMoviesList(res);
         localStorage.setItem('searchedMoviesList', JSON.stringify(res));
         localStorage.setItem('searchWord', movieName);
-        localStorage.setItem('shortMovies', shortMovie)
+        localStorage.setItem('shortMovies', toggle)
       }
     } else {
       setSearchMovies([]);
     }
   }
 
-  function handleSearchMovies(movieName) {
+  function handleSearchMovies(movieName, toggle=shortMovie) {
     setSearchedMoviesList([]);
     setSearchedShortMoviesList([]);
     setEmptySearch(false);
     setPreloader(true);
     setTimeout(() => {
-      setPreloader(false);
-    }, 2000)
+      search(movieName, toggle);
+    }, 500);
     setTimeout(() => {
-      search(movieName);
-    }, 2000);
+      setPreloader(false);
+    }, 500)
   }
 
   useEffect(() => {
@@ -203,12 +227,6 @@ function App(props) {
 
   useEffect(() => {
     if (loggedIn) {
-      loadMovies();
-    }
-  }, [loggedIn, searchedMoviesList, searchedShortMoviesList])
-
-  useEffect(() => {
-    if (loggedIn) {
       setCountCards(searchMovies.length);
     }
   }, [searchMovies])
@@ -219,14 +237,6 @@ function App(props) {
     }
   }, [countCards])
   
-  function loadMovies() {
-    const searched = JSON.parse(localStorage.getItem('searchedMoviesList'));
-    const searchWord = localStorage.getItem('searchWord');
-    setSearchWord(searchWord);
-    if (searched && searched !== []) {
-      setSearchMovies(searched);
-    }
-  }
 
   function handleLoginUser(data) {
     api.authorize(data)

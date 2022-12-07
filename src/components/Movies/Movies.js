@@ -14,7 +14,7 @@ function Movies(props) {
       <Header
         loggedIn={props.loggedIn}
       >
-        <div className="header__nav">
+        <div className={`header__nav ${props.navVisible && 'header__nav_visible'}`}>
           <div className="header__nav-container">
             <Navigation  closeNavbar={props.closeNavbar} />
             <button className="header__close" type="button" onClick={props.closeNavbar}></button>
