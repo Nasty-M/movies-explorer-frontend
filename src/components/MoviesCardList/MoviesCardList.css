@@ -2,3 +2,7 @@
 @import url(../../blocks/movies/__content/movies__content.css);
 @import url(../../blocks/movies/__list/movies__list.css);
 @import url(../../blocks/movies/__button/movies__button.css);
+@import url(../../blocks/movies/__button/_active/movies__button_active.css);
+@import url(../../blocks/movies/__nothing/movies__mothing.css);
+@import url(../../blocks/movies/__message/movies__message.css);
+@import url(../../blocks/movies/__message/_active/movies__message_active.css);

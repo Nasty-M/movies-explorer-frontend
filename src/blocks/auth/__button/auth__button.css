@@ -8,4 +8,6 @@
   margin-top: 141px;
   border: none;
   border-radius: 3px;
+  outline: none;
+  cursor: pointer;
 }

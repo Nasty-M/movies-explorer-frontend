@@ -7,4 +7,5 @@
 @import url(../../blocks/profile/__value/profile__value.css);
 @import url(../../blocks/profile/__buttons/profile__buttons.css);
 @import url(../../blocks/profile/__button/profile__button.css);
+@import url(../../blocks/profile/__button/_disabled/profile__button_disabled.css);
 @import url(../../blocks/profile/__button/_type/profile__button_type_red.css);

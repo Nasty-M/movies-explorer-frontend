@@ -9,3 +9,7 @@
 .profile__button:last-of-type {
   margin-bottom: 0;
 }
+
+.profile__button:disabled {
+  cursor: default;
+}
